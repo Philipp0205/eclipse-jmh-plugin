@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+      point="org.eclipse.debug.core.launchConfigurationTypes">
+   <launchConfigurationType
+         id="com.example.jmhplugin.launchconfigType"
+         name="JMH Benchmark"
+         delegate="com.example.jmhplugin.launcher.JmhLaunchConfigurationDelegate"
+         modes="run">
+   </launchConfigurationType>
+</extension>
+<extension
+      point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+   <launchConfigurationTabGroup
+         id="com.example.launchConfig.launchconfig"
+         type="com.example.jmhplugin.launchconfigType"
+         class="com.example.jmhplugin.launcher.LunchTabGroup">
+   </launchConfigurationTabGroup>
+</extension>
+<extension
+      point="org.eclipse.ui.commands">
+   <command
+         id="jmh.launch.command"
+         name="Launch JMH Benchmark">
+   </command>
+</extension>
+<extension
+      point="org.eclipse.ui.handlers">
+   <handler
+         commandId="jmh.launch.command"
+         class="com.example.jmhplugin.handlers.JMHLaunchHandler">
+   </handler>
+</extension>
+
+<extension
+	point="org.eclipse.debug.ui.launchShortcuts">
+	<shortcut
+            label="JMH Benchmark"
+            icon="$nl$/icons/add.png"
+            helpContextId="org.eclipse.jdt.junit.launch_shortcut"
+            class="com.example.jmhplugin.launcher.JmhLaunchShortcut"
+            modes="run, debug"
+            id="com.example.jmhplugin.jmhShortcut">
+         	<contextualLaunch>
+	            <enablement>
+               		<with variable="selection">
+                  	<count value="1"/>
+               	  	<iterate>
+                     	<adapt type="org.eclipse.jdt.core.IJavaElement">
+                     	<!--<and>
+		                	<test property="org.eclipse.jdt.core.hasTypeOnClasspath" value="org.openjdk.jmh.annotations.Benchmark"/>
+                  		</and>-->
+		             </adapt>
+		          </iterate>
+               </with>
+            </enablement>
+         </contextualLaunch>
+         <configurationType
+               id="com.example.jmhplugin.launchconfig">
+         </configurationType>
+         <description
+               description="Debug JMH Benchmark"
+               mode="debug">
+         </description>
+         <description
+               description="Run JMH Benchmark"
+               mode="run">
+         </description>
+      </shortcut>
+   </extension>
+</plugin>

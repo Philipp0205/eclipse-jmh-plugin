@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<libraryInfos>
+    <libraryInfo home="/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.362.b09-2.el9_1.x86_64/jre" version="1.8.0_362">
+        <bootpath>
+            <entry path="/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.362.b09-2.el9_1.x86_64/jre/lib/resources.jar"/>
+            <entry path="/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.362.b09-2.el9_1.x86_64/jre/lib/rt.jar"/>
+            <entry path="/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.362.b09-2.el9_1.x86_64/jre/lib/sunrsasign.jar"/>
+            <entry path="/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.362.b09-2.el9_1.x86_64/jre/lib/jsse.jar"/>
+            <entry path="/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.362.b09-2.el9_1.x86_64/jre/lib/jce.jar"/>
+            <entry path="/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.362.b09-2.el9_1.x86_64/jre/lib/charsets.jar"/>
+            <entry path="/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.362.b09-2.el9_1.x86_64/jre/lib/jfr.jar"/>
+            <entry path="/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.362.b09-2.el9_1.x86_64/jre/classes"/>
+        </bootpath>
+        <extensionDirs>
+            <entry path="/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.362.b09-2.el9_1.x86_64/jre/lib/ext"/>
+            <entry path="/usr/java/packages/lib/ext"/>
+        </extensionDirs>
+        <endorsedDirs>
+            <entry path="/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.362.b09-2.el9_1.x86_64/jre/lib/endorsed"/>
+        </endorsedDirs>
+    </libraryInfo>
+    <libraryInfo home="/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.362.b09-2.el9_1.x86_64" version="1.8.0_362">
+        <bootpath>
+            <entry path="/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.362.b09-2.el9_1.x86_64/jre/lib/resources.jar"/>
+            <entry path="/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.362.b09-2.el9_1.x86_64/jre/lib/rt.jar"/>
+            <entry path="/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.362.b09-2.el9_1.x86_64/jre/lib/sunrsasign.jar"/>
+            <entry path="/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.362.b09-2.el9_1.x86_64/jre/lib/jsse.jar"/>
+            <entry path="/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.362.b09-2.el9_1.x86_64/jre/lib/jce.jar"/>
+            <entry path="/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.362.b09-2.el9_1.x86_64/jre/lib/charsets.jar"/>
+            <entry path="/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.362.b09-2.el9_1.x86_64/jre/lib/jfr.jar"/>
+            <entry path="/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.362.b09-2.el9_1.x86_64/jre/classes"/>
+        </bootpath>
+        <extensionDirs>
+            <entry path="/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.362.b09-2.el9_1.x86_64/jre/lib/ext"/>
+            <entry path="/usr/java/packages/lib/ext"/>
+        </extensionDirs>
+        <endorsedDirs>
+            <entry path="/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.362.b09-2.el9_1.x86_64/jre/lib/endorsed"/>
+        </endorsedDirs>
+    </libraryInfo>
+    <libraryInfo home="/usr/lib/jvm/java-21-zulu-openjdk-jdk" version="21.0.3"/>
+    <libraryInfo home="/usr/lib/jvm/java-11-openjdk-11.0.18.0.10-2.el9_1.x86_64" version="11.0.18"/>
+    <libraryInfo home="/usr/lib/jvm/java-17" version="17.0.6"/>
+    <libraryInfo home="/usr/lib/jvm/jdk-21_adoptium" version="21.0.2"/>
+    <libraryInfo home="/usr/lib/jvm/jdk-17_adoptium" version="17.0.6"/>
+</libraryInfos>
