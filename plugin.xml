@@ -10,12 +10,20 @@
          modes="run">
    </launchConfigurationType>
 </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+      <launchConfigurationTypeImage
+            icon="$nl$/icons/jmh.png"
+            configTypeID="com.example.jmhplugin.launchconfigType"
+            id="org.eclipse.jdt.junit.launchimage">
+      </launchConfigurationTypeImage>
+   </extension>
 <extension
       point="org.eclipse.debug.ui.launchConfigurationTabGroups">
    <launchConfigurationTabGroup
          id="com.example.launchConfig.launchconfig"
          type="com.example.jmhplugin.launchconfigType"
-         class="com.example.jmhplugin.launcher.LunchTabGroup">
+         class="com.example.jmhplugin.runconfig.ui.LunchTabGroup">
    </launchConfigurationTabGroup>
 </extension>
 <extension
@@ -37,7 +45,7 @@
 	point="org.eclipse.debug.ui.launchShortcuts">
 	<shortcut
             label="JMH Benchmark"
-            icon="$nl$/icons/add.png"
+            icon="$nl$/icons/jmh.png"
             helpContextId="org.eclipse.jdt.junit.launch_shortcut"
             class="com.example.jmhplugin.launcher.JmhLaunchShortcut"
             modes="run, debug"

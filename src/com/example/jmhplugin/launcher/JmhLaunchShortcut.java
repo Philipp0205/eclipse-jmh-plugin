@@ -1,7 +1,6 @@
 package com.example.jmhplugin.launcher;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -27,7 +26,6 @@ import org.eclipse.jdt.core.ITypeRoot;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.internal.ui.actions.SelectionConverter;
 import org.eclipse.jdt.launching.IJavaLaunchConfigurationConstants;
-import org.eclipse.jdt.launching.JavaRuntime;
 import org.eclipse.jdt.ui.JavaUI;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.viewers.ISelection;
@@ -192,16 +190,18 @@ public class JmhLaunchShortcut implements ILaunchShortcut2 {
 		try {
 			ILaunchManager launchManager = DebugPlugin.getDefault().getLaunchManager();
 			ILaunchConfigurationType launchConfigType = launchManager.getLaunchConfigurationType(LAUNCH_CONFIG_TYPE);		
-			String configName = launchManager.generateLaunchConfigurationName(mainTypeQyalifiedName);
+			String configName = launchManager.generateLaunchConfigurationName(suggestLaunchConfigurationName(element, testName));
 			ILaunchConfigurationWorkingCopy wc = launchConfigType.newInstance(null, configName);
 
+			IPath absoluteProjectPath = element.getJavaProject().getProject().getLocation();
+			wc.setAttribute("absoluteProjectPath", absoluteProjectPath.toOSString() );
 			wc.setAttribute("isMethod", isMethod);
+			wc.setAttribute("outputFolderPath", absoluteProjectPath.toOSString());
+			wc.setAttribute("outputFileName", configName);
 			wc.setAttribute(IJavaLaunchConfigurationConstants.ATTR_DEFAULT_CLASSPATH, false);
 			wc.setAttribute(IJavaLaunchConfigurationConstants.ATTR_MAIN_TYPE_NAME, mainTypeQyalifiedName);
 			wc.setAttribute(IJavaLaunchConfigurationConstants.ATTR_PROJECT_NAME,
 					element.getJavaProject().getElementName());
-			IPath absoluteProjectPath = element.getJavaProject().getProject().getLocation();
-			wc.setAttribute("absoluteProjectPath", absoluteProjectPath.toOSString());
 
 			return wc;
 		} catch (CoreException e) {
@@ -209,59 +209,20 @@ public class JmhLaunchShortcut implements ILaunchShortcut2 {
 		}
 		return null;
 	}
-
-	private void createLaunchConfiguration(IMember member) {
-		// method or class
-		if (member.getElementType() == IJavaElement.METHOD  || member.getElementType() == IJavaElement.TYPE) {
-			try {
-				String testName = member.getElementName();
-				String fullyQualifiedName = "";
-	            String jmhFullyQualifiedName = "";
-
-				if (member.getElementType() == IJavaElement.METHOD) {
-					IType declaringType = member.getDeclaringType();
-					fullyQualifiedName = declaringType.getFullyQualifiedName();
-				 	jmhFullyQualifiedName = fullyQualifiedName + "." + testName;
-				} 
-				
-				if (member.getElementType() == IJavaElement.TYPE) {
-					IType classFile = (IType) member;
-					fullyQualifiedName = classFile.getFullyQualifiedName();
-					jmhFullyQualifiedName = fullyQualifiedName;
-                }
-				
-				ILaunchManager launchManager = DebugPlugin.getDefault().getLaunchManager();
-				ILaunchConfigurationType launchConfigType = launchManager
-						.getLaunchConfigurationType(LAUNCH_CONFIG_TYPE);
-				ILaunchConfigurationWorkingCopy launchConfigWorkingCopy = launchConfigType.newInstance(null,
-						launchManager.generateLaunchConfigurationName(testName));
-				
-	            configureLaunchConfig(launchConfigWorkingCopy, member, jmhFullyQualifiedName);
-
-			
-			} catch (CoreException e) {
-				e.printStackTrace();
-			}
+	
+	protected String suggestLaunchConfigurationName(IJavaElement element, String fullTestName) {
+		switch (element.getElementType()) {
+		case IJavaElement.METHOD:
+			IMethod method = (IMethod) element;
+			String methodName = method.getElementName();
+			return method.getDeclaringType().getElementName() + "." + methodName;
+		case IJavaElement.TYPE:
+			return ((IType) element).getElementName();
+		default:
+			throw new IllegalArgumentException("Unexpected value: " + element.getClass().getName());
 		}
 	}
 	
-	private void configureLaunchConfig(ILaunchConfigurationWorkingCopy launchConfigWorkingCopy, IJavaElement member,
-			String jmhFullyQualifiedName) throws CoreException {
-		String[] classpathEntries = JavaRuntime.computeDefaultRuntimeClassPath(member.getJavaProject());
-		launchConfigWorkingCopy.setAttribute(IJavaLaunchConfigurationConstants.ATTR_CLASSPATH,
-				Arrays.asList(classpathEntries));
-
-		launchConfigWorkingCopy.setAttribute(IJavaLaunchConfigurationConstants.ATTR_DEFAULT_CLASSPATH, false);
-		launchConfigWorkingCopy.setAttribute(IJavaLaunchConfigurationConstants.ATTR_MAIN_TYPE_NAME,
-				"org.openjdk.jmh.Main");
-		launchConfigWorkingCopy.setAttribute(IJavaLaunchConfigurationConstants.ATTR_PROJECT_NAME,
-				member.getJavaProject().getElementName());
-		IPath absoluteProjectPath = member.getJavaProject().getProject().getLocation();
-		launchConfigWorkingCopy.setAttribute("absoluteProjectPath", absoluteProjectPath.toOSString());
-		launchConfigWorkingCopy.setAttribute("jmhFullyQualifiedName", jmhFullyQualifiedName);
-
-	}
-
 	/**
 	 * Resolves the member name of the selected element in the editor
 	 * 

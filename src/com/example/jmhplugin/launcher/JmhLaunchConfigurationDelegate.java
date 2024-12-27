@@ -27,8 +27,9 @@ public class JmhLaunchConfigurationDelegate extends LaunchConfigurationDelegate 
     public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, org.eclipse.core.runtime.IProgressMonitor monitor) throws CoreException {
     	String outputFileTypeString = configuration.getAttribute("outputFileType", "JSON");
     	String absoluteProjectPath = configuration.getAttribute("absoluteProjectPath", "");
-    	String outputFilePath = configuration.getAttribute("outputFilePath",  absoluteProjectPath + "/result.json");
+    	String outputFolderPath = configuration.getAttribute("outputFolderPath",  absoluteProjectPath + "/result.json");
     	String mainQyalifiedName = configuration.getAttribute(IJavaLaunchConfigurationConstants.ATTR_MAIN_TYPE_NAME, "");
+    	String outputFileName = configuration.getAttribute("outputFileName", "result.json"); 
     	
     	if (configuration.getAttribute("isMethod", false)) {
     		mainQyalifiedName = mainQyalifiedName + "$";
@@ -45,7 +46,7 @@ public class JmhLaunchConfigurationDelegate extends LaunchConfigurationDelegate 
 					"-rf",
 					outputFileType.toString().toLowerCase(),
 					"-rff",
-					outputFilePath 
+					outputFolderPath + "/" + outputFileName + "." + outputFileType.toString().toLowerCase()
 					);
 
 			System.out.println(String.join(" ", builder.command()));
