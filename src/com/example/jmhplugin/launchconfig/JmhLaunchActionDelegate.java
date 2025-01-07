@@ -1,4 +1,4 @@
-package com.example.jmhplugin.launcher;
+package com.example.jmhplugin.launchconfig;
 
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;

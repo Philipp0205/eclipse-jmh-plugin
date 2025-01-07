@@ -3,6 +3,8 @@ Bundle-ManifestVersion: 2
 Bundle-Name: BenchmarkRunnerPlugin
 Bundle-SymbolicName: com.example.jmh;singleton:=true
 Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: com.example.jmhplugin.JmhPlugin
+Bundle-ActivationPolicy: lazy
 Import-Package: org.junit.runner.notification
 Require-Bundle: org.eclipse.ui,
  org.eclipse.jdt.core;bundle-version="3.37.0",

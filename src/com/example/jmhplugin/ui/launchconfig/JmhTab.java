@@ -1,4 +1,4 @@
-package com.example.jmhplugin.runconfig.ui;
+package com.example.jmhplugin.ui.launchconfig;
 
 import java.util.Arrays;
 

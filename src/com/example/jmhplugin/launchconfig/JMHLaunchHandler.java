@@ -1,4 +1,4 @@
-package com.example.jmhplugin.handlers;
+package com.example.jmhplugin.launchconfig;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
