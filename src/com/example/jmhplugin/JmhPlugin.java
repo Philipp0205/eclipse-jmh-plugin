@@ -16,6 +16,7 @@ public class JmhPlugin extends AbstractUIPlugin {
 	
 	@Override
 	public void start(BundleContext context) throws Exception {
+		System.out.println("JmhPlugin started");
 		super.start(context);
 		plugin = this;
 	}

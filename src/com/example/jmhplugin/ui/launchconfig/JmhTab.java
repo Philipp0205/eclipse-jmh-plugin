@@ -18,7 +18,7 @@ import org.eclipse.swt.widgets.Text;
 import org.openjdk.jmh.results.format.ResultFormatType;
 
 public class JmhTab extends AbstractLaunchConfigurationTab {
-	private Text outputFileText;
+	private Text outputPathText;
 	private Text outputFileNameText;
 	private Combo fileTypeCombo;
 	private Button browseButton;
@@ -36,8 +36,8 @@ public class JmhTab extends AbstractLaunchConfigurationTab {
         GridDataFactory.fillDefaults().align(SWT.LEFT, SWT.CENTER).span(5,1).applyTo(outputLabel);
 
         // Path Folder Text Field
-        outputFileText = new Text(mainComposite, SWT.BORDER);
-        GridDataFactory.fillDefaults().grab(true, false).applyTo(outputFileText);
+        outputPathText = new Text(mainComposite, SWT.BORDER);
+        GridDataFactory.fillDefaults().grab(true, false).applyTo(outputPathText);
         
         Label slash = new Label(mainComposite, SWT.NONE);
         slash.setText("/");
@@ -48,7 +48,7 @@ public class JmhTab extends AbstractLaunchConfigurationTab {
         GridDataFactory.fillDefaults().grab(true, false).applyTo(outputFileNameText); 
         
         // Add listeners or additional configurations as needed
-        outputFileText.addModifyListener(e -> updateLaunchConfigurationDialog());
+        outputPathText.addModifyListener(e -> updateLaunchConfigurationDialog());
         outputFileNameText.addModifyListener(e -> updateLaunchConfigurationDialog());
         
         // File Type Selection
@@ -104,7 +104,7 @@ public class JmhTab extends AbstractLaunchConfigurationTab {
 		String selectedDirectory = directoryDialog.open();
 
 		if (selectedDirectory != null) {
-			outputFileText.setText(selectedDirectory);
+			outputPathText.setText(selectedDirectory);
 		}
 	}
 
@@ -122,7 +122,7 @@ public class JmhTab extends AbstractLaunchConfigurationTab {
 	public void initializeFrom(ILaunchConfiguration configuration) {
 		try {
 			fileTypeCombo.setText(configuration.getAttribute("outputFileType", "JSON"));
-			outputFileText.setText(configuration.getAttribute("outputFolderPath", "default-output-directory"));
+			outputPathText.setText(configuration.getAttribute("outputFolderPath", "default-output-directory"));
 			outputFileNameText.setText(configuration.getAttribute("outputFileName", "default-file-name"));
 		} catch (CoreException e) {
 			e.printStackTrace();
@@ -131,7 +131,7 @@ public class JmhTab extends AbstractLaunchConfigurationTab {
 
     @Override
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
-		configuration.setAttribute("outputFolderPath", outputFileText.getText());
+		configuration.setAttribute("outputFolderPath", outputPathText.getText());
 		configuration.setAttribute("outputFileType", fileTypeCombo.getText());
 		configuration.setAttribute("outputFileName", outputFileNameText.getText());
 	}
